@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Build output
+store-assets/tenup-extension-chrome.zip
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node (si ajouté plus tard)
+node_modules/

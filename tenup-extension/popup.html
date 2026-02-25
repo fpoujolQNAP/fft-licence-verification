@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1>TenUp Recherche</h1>
+    <p class="subtitle">Recherche de licenciés FFT</p>
+    <p class="header-warning">Connexion obligatoire sur <a href="https://tenup.fft.fr" target="_blank">tenup.fft.fr</a> avant toute recherche. La navigation privée peut causer des dysfonctionnements.</p>
+  </div>
+
+  <div class="input-section">
+    <label for="licences">Numéros de licence (un par ligne) :</label>
+    <div class="input-row">
+      <div class="input-left">
+        <textarea id="licences" rows="8" placeholder="8208043
+9509464
+4994315
+877994"></textarea>
+        <div class="actions">
+          <button id="btn-search" class="btn-primary">Rechercher</button>
+          <button id="btn-stop" class="btn-stop hidden">Stopper</button>
+          <button id="btn-clear" class="btn-secondary">Effacer</button>
+        </div>
+      </div>
+      <div class="tips-box">
+        <strong>Astuce</strong>
+        <ul>
+          <li>Collez vos numéros de licence, un par ligne</li>
+          <li>Les lettres de licence (ex: "R", "B") sont retirées automatiquement</li>
+          <li>Raccourci : <kbd>Ctrl+Entrée</kbd> pour lancer la recherche</li>
+          <li>Les résultats sont exportables en CSV et Markdown</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="progress-section" class="progress-section hidden">
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+    <span id="progress-text" class="progress-text">0 / 0</span>
+  </div>
+
+  <div id="detail-fetch-section" class="detail-fetch-section hidden">
+    <span id="detail-fetch-text" class="detail-fetch-text">Récupération des détails… 0 / 0</span>
+  </div>
+
+  <div id="error-section" class="error-section hidden">
+    <p id="error-message"></p>
+  </div>
+
+  <div id="results-section" class="results-section hidden">
+    <div class="results-header">
+      <h2>Résultats <span id="results-count"></span></h2>
+      <div class="export-buttons">
+        <button id="btn-copy" class="btn-copy" title="Copier en CSV">Copier CSV</button>
+        <button id="btn-export-md" class="btn-export-md" title="Exporter en Markdown">Exporter MD</button>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Licence</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Né</th>
+            <th>Club</th>
+            <th>Classement</th>
+            <th>Meilleur</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modale détail joueur -->
+  <div id="detail-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="detail-player-name"></h2>
+        <button id="detail-close" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-tabs">
+        <button class="tab-btn active" data-tab="profilJoueur">Profil</button>
+        <button class="tab-btn" data-tab="ficheJoueur">Fiche</button>
+        <button class="tab-btn" data-tab="palmares">Palmarès</button>
+        <button class="tab-btn" data-tab="bilanClassement">Bilan</button>
+        <button class="tab-btn" data-tab="bilanClassementHistorique">Historique</button>
+        <button class="tab-btn" data-tab="simulationClassement">Simulation</button>
+      </div>
+      <div class="modal-body">
+        <div id="tab-profilJoueur" class="tab-content active"></div>
+        <div id="tab-ficheJoueur" class="tab-content"></div>
+        <div id="tab-palmares" class="tab-content"></div>
+        <div id="tab-bilanClassement" class="tab-content"></div>
+        <div id="tab-bilanClassementHistorique" class="tab-content"></div>
+        <div id="tab-simulationClassement" class="tab-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="copied-toast" class="toast hidden">Copié !</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
